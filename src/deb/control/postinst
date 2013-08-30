@@ -1,0 +1,34 @@
+#!/bin/sh
+SEMAGROW_HOME="/opt/semagrow/";
+SEMAGROW_GROUP="semagrow-admin";
+SEMAGROW_USER="semagrow";
+
+echo "POSTINSTALL"
+set -e
+case "$1" in
+    configure)
+        echo "Configure";
+        echo "Checking Stack Group and User";
+
+        if ! getent group "$SEMAGROW_GROUP" > /dev/null 2>&1 ; then
+            addgroup --system "$SEMAGROW_GROUP" --quiet
+            echo "Created group $SEMAGROW_GROUP";
+        else 
+            echo "Group $SEMAGROW_GROUP already exists";
+        fi
+
+        if ! id $SEMAGROW_USER > /dev/null 2>&1 ; then
+            adduser --system --home $SEMAGROW_HOME --no-create-home \
+            --ingroup "$SEMAGROW_GROUP" --disabled-password --shell /bin/false \
+            "$SEMAGROW_USER"
+            echo "Created user $SEMAGROW_USER";
+        else
+            echo "User $SEMAGROW_USER already exists";
+        fi
+
+        chmod 640 $SEMAGROW_HOME/conf/tomcat-users.xml
+        chown -Rh $SEMAGROW_USER:$SEMAGROW_GROUP $SEMAGROW_HOME/
+        chmod +x  $SEMAGROW_HOME/bin/*.sh        
+        chmod +x  /etc/init.d/semagrow
+    ;;
+esac
