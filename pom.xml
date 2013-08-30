@@ -6,6 +6,11 @@
     <version>1.0.0-rc1</version>
     <!--<packaging>pom</packaging>-->
     <name>semagrow-stack-debian</name>
+
+    <scm>
+        <connection>scm:git:git://github.com/semagrow/semagrow-stack-modules.git</connection>
+        <url>https://github.com/semagrow/semagrow-stack-modules</url>
+    </scm>
     
     <dependencies>
         <dependency>
