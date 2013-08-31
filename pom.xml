@@ -70,8 +70,7 @@
                                     <resources>                                                  
                                         <resource>
                                             <directory>${basedir}/src/deb</directory>
-                                            <filtering>true</filtering>
-                                            
+                                            <filtering>true</filtering>                                            
                                         </resource>
                                     </resources>              
                                 </configuration>            
@@ -87,7 +86,7 @@
                                     <resources>                                                  
                                         <resource>
                                             <directory>${basedir}/src/bin</directory>
-                                            <filtering>true</filtering>                                            
+                                            <filtering>true</filtering>                                                                                                                                    
                                         </resource>
                                     </resources>              
                                 </configuration>                                            
@@ -152,6 +151,20 @@
                         <artifactId>exec-maven-plugin</artifactId>
                         <groupId>org.codehaus.mojo</groupId>
                         <executions>
+                            <execution><!-- Run our version calculation script -->
+                                <id>chmod-debian-deploy</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>                               
+                                <configuration>                                                                       
+                                    <executable>chmod</executable>
+                                    <arguments>
+                                        <argument>+x</argument>
+                                        <argument>${basedir}/target/bin/deploy-debian.sh</argument>
+                                    </arguments>                                    
+                                </configuration>
+                            </execution>                            
                             <execution><!-- Run our version calculation script -->
                                 <id>debian-deploy</id>
                                 <phase>package</phase>
