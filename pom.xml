@@ -82,11 +82,11 @@
                                     <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
-                                    <outputDirectory>${basedir}/target/bin</outputDirectory>
+                                    <outputDirectory>${basedir}/target/</outputDirectory>
                                     <resources>                                                  
                                         <resource>
                                             <directory>${basedir}/src/bin</directory>
-                                            <filtering>true</filtering>                                                                                                                                    
+                                            <filtering>true</filtering>                                            
                                         </resource>
                                     </resources>              
                                 </configuration>                                            
@@ -161,7 +161,7 @@
                                     <executable>chmod</executable>
                                     <arguments>
                                         <argument>+x</argument>
-                                        <argument>${basedir}/target/bin/deploy-debian.sh</argument>
+                                        <argument>${basedir}/target/deploy-debian.sh</argument>
                                     </arguments>                                    
                                 </configuration>
                             </execution>                            
