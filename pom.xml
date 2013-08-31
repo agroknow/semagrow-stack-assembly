@@ -60,20 +60,35 @@
                         <version>2.6</version>
                         <executions>
                             <execution>                        
-                                <!-- here the phase you need -->
                                 <phase>validate</phase>
                                 <goals>
                                     <goal>copy-resources</goal>
                                 </goals>
                                 <configuration>
                                     <outputDirectory>${basedir}/target/deb</outputDirectory>
-                                    <resources>          
+                                    <resources>                                                  
                                         <resource>
                                             <directory>${basedir}/src/deb</directory>
                                             <filtering>true</filtering>
+                                            
                                         </resource>
                                     </resources>              
                                 </configuration>            
+                            </execution>
+                            <execution>
+                                <phase>validate</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/bin</outputDirectory>
+                                    <resources>                                                  
+                                        <resource>
+                                            <directory>${basedir}/src/bin</directory>
+                                            <filtering>true</filtering>                                            
+                                        </resource>
+                                    </resources>              
+                                </configuration>                                            
                             </execution>
                         </executions>
                     </plugin>            
@@ -89,7 +104,8 @@
                                 </goals>
                                 <configuration>                            
                                     <verbose>true</verbose>                            
-                                    <controlDir>${basedir}/target/deb/control</controlDir>                                                        
+                                    <controlDir>${basedir}/target/deb/control</controlDir> 
+                                                                                         
                                     <dataSet>            
                                         <data>                                    
                                             <src>${basedir}/target/deb/init.d</src>
@@ -141,7 +157,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>${basedir}/src/bin/deploy-debian.sh</executable>
+                                    <executable>${basedir}/target/bin/deploy-debian.sh</executable>
                                 </configuration>
                             </execution>
                         </executions>
