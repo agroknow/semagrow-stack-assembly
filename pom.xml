@@ -172,7 +172,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>                                   
-                                    <executable>${basedir}/target/bin/deploy-debian.sh</executable>
+                                    <executable>${basedir}/target/deploy-debian.sh</executable>
                                 </configuration>
                             </execution>
                         </executions>
