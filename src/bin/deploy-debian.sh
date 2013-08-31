@@ -2,6 +2,7 @@ echo "DEPLOYING DEBIAN"
 
 DEBIAN_REPOSITORY_ROOT="/var/www/deb"
 
+cd "target"
 FILES=${project.artifactId}*.deb
 for f in $FILES
 do
