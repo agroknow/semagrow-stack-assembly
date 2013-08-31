@@ -59,7 +59,8 @@
                         <artifactId>maven-resources-plugin</artifactId>
                         <version>2.6</version>
                         <executions>
-                            <execution>                        
+                            <execution>  
+                                <id>copy-deb</id>                      
                                 <phase>validate</phase>
                                 <goals>
                                     <goal>copy-resources</goal>
@@ -76,6 +77,7 @@
                                 </configuration>            
                             </execution>
                             <execution>
+                                <id>copy-deb-deploy-script</id>
                                 <phase>validate</phase>
                                 <goals>
                                     <goal>copy-resources</goal>
@@ -156,7 +158,7 @@
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
-                                <configuration>
+                                <configuration>                                   
                                     <executable>${basedir}/target/bin/deploy-debian.sh</executable>
                                 </configuration>
                             </execution>
