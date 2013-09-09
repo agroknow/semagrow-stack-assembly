@@ -11,6 +11,23 @@
         <connection>scm:git:git://github.com/semagrow/semagrow-stack-assembly.git</connection>
         <url>https://github.com/semagrow/semagrow-stack-assembly</url>
     </scm>
+
+    <!-- REPOSITORIES -->
+    <repositories>
+        <repository>
+            <id>swc-semagrow</id>
+            <name>SWC SemaGrow Repository</name>
+            <url>http://semagrow.semantic-web.at/mvn/</url>
+            <snapshots>
+                <updatePolicy>always</updatePolicy>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>maven-central</id>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+    </repositories>
     
     <dependencies>
         <dependency>
