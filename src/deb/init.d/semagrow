@@ -19,7 +19,7 @@ set -e
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 NAME="semagrow"
 DESC="SemaGrowStack"
-ARTIFACT_ID="semagrow-stack-debian"
+ARTIFACT_ID="semagrow-stack"
 SHORT_NAME="semagrow"
 SEMAGROW_HOME="/opt/semagrow"
 SEMAGROW_GROUP="semagrow-admin"
@@ -182,7 +182,7 @@ case "$1" in
 		exit 1
 	fi
 
-	log_daemon_msg "Starting $DESC" "$NAME"
+	echo "Starting $DESC" "$NAME"
 	if start-stop-daemon --test --start --pidfile "$SEMAGROW_PID" \
 		--user $SEMAGROW_USER --exec "$JAVA_HOME/bin/java" \
 		>/dev/null; then
@@ -213,7 +213,7 @@ case "$1" in
 	fi
 	;;
   stop)
-	log_daemon_msg "Stopping $DESC" "$NAME"
+	echo "Stopping $DESC" "$NAME"
 
 	set +e
 	if [ -f "$SEMAGROW_PID" ]; then 

@@ -108,13 +108,13 @@
                                             <filemode>755</filemode>
                                             <sources>
                                                 <source>
-                                                    <location>${basedir}/src/deb/init.d/semagrow</location>
+                                                    <location>${basedir}/src/rpm/init.d/semagrow</location>
                                                 </source>
                                             </sources>
                                         </mapping>
                                     </mappings>
                                     <preremoveScriptlet>
-                                        <scriptFile>${basedir}/src/deb/control/prerm</scriptFile>
+                                        <scriptFile>${basedir}/src/commons/control/prerm</scriptFile>
                                     </preremoveScriptlet>
                                 </configuration>
                             </execution>
@@ -139,7 +139,7 @@
                                 </goals>
                                 <configuration>                            
                                     <verbose>true</verbose>                            
-                                    <controlDir>${basedir}/target/deb/control</controlDir> 
+                                    <controlDir>${basedir}/target/deb/control</controlDir>
                                                                                          
                                     <dataSet>            
                                         <data>                                    
