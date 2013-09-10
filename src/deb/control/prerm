@@ -1,2 +1,3 @@
 #!/bin/sh
-echo "PRERM"
+echo "removing semagrow init script"
+rm -f /etc/init.d/semagrow
