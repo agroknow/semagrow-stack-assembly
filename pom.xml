@@ -75,6 +75,9 @@
     <profiles>
         <profile>
             <id>rpm</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -162,6 +165,9 @@
         </profile>
         <profile>
             <id>debian</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
