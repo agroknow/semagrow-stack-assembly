@@ -116,7 +116,7 @@
                                     <preremoveScriptlet>
                                         <scriptFile>${basedir}/src/commons/control/prerm</scriptFile>
                                     </preremoveScriptlet>
-                                    <keyname>juergen &gt;jakobitschj@semantic-web.at&lt;</keyname>
+                                    <keyname>Semagrow FP7</keyname>
                                 </configuration>
                             </execution>
                         </executions>
