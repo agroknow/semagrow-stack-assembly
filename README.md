@@ -14,4 +14,4 @@ Usage
 
 To create the rpm and deb packages in the target/ dir deploy the created packages to the local repository directories type
 
-mvn package
+mvn package -P{debian,rpm}

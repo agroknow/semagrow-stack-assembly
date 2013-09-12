@@ -75,9 +75,6 @@
     <profiles>
         <profile>
             <id>rpm</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -119,6 +116,7 @@
                                     <preremoveScriptlet>
                                         <scriptFile>${basedir}/src/commons/control/prerm</scriptFile>
                                     </preremoveScriptlet>
+                                    <keyname>juergen &gt;jakobitschj@semantic-web.at&lt;</keyname>
                                 </configuration>
                             </execution>
                         </executions>
@@ -165,9 +163,6 @@
         </profile>
         <profile>
             <id>debian</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
             <build>
                 <plugins>
                     <plugin>
