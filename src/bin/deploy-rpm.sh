@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "SIGNING PACKAGE"
-rpm-sign.exp target/*.rpm
+src/bin/rpm-sign.exp target/*.rpm
 
 echo "DEPLOYING RPM"
 RPM_REPOSITORY_ROOT="/var/www/rpm"
