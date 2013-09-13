@@ -91,6 +91,7 @@
                                     <group>Applications/Databases</group>
                                     <copyright>2013, SWC</copyright>
                                     <packager>SWC</packager>
+                                    <needarch>x86_64</needarch>
                                     <mappings>
                                         <mapping>
                                             <directory>/opt/semagrow</directory>
@@ -112,9 +113,19 @@
                                                 </source>
                                             </sources>
                                         </mapping>
+                                        <mapping>
+                                            <directory>/sbin/start-stop-daemon</directory>
+                                            <directoryIncluded>false</directoryIncluded>
+                                            <filemode>755</filemode>
+                                            <sources>
+                                                <source>
+                                                    <location>${basedir}/bin/start-stop-daemon</location>
+                                                </source>
+                                            </sources>
+                                        </mapping>
                                     </mappings>
                                     <preremoveScriptlet>
-                                        <scriptFile>${basedir}/src/commons/control/prerm</scriptFile>
+                                        <scriptFile>${basedir}/src/rpm/control/prerm</scriptFile>
                                     </preremoveScriptlet>
                                 </configuration>
                             </execution>
@@ -134,7 +145,7 @@
                                     <outputDirectory>${basedir}/target</outputDirectory>
                                     <resources>
                                         <resource>
-                                            <directory>${basedir}/target/rpm/${project.artifactId}/RPMS/noarch</directory>
+                                            <directory>${basedir}/target/rpm/${project.artifactId}/RPMS/x86_64</directory>
                                         </resource>
                                     </resources>
                                 </configuration>
@@ -152,7 +163,7 @@
                                     <goal>exec</goal>
                                 </goals>
                                 <configuration>
-                                    <executable>${basedir}/src/bin/deploy-rpm.sh</executable>
+                                    <executable>${basedir}/src/script/deploy-rpm.sh</executable>
                                 </configuration>
                             </execution>
                         </executions>
@@ -248,7 +259,7 @@
                                     <outputDirectory>${basedir}/target/</outputDirectory>
                                     <resources>
                                         <resource>
-                                            <directory>${basedir}/src/bin</directory>
+                                            <directory>${basedir}/src/script</directory>
                                             <filtering>true</filtering>
                                         </resource>
                                     </resources>
