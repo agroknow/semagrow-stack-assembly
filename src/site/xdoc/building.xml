@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <properties>
+        <author>Jürgen Jakobitsch</author>
+        <title>SemaGrow-Stack-Assembly - Building</title>
+    </properties>
+    <meta name="keyword" content="semagrow, build"/>
+    <body>
+        <section name="Building">
+            <p>   
+                This page contains information on how to create and customize debian/rpm
+                distributions of the SemaGrow-Stack-Webapp.
+            </p>
+            <p>
+                <ol>
+                    <li>Notes</li>
+                    <li>System requirements</li>
+                    <li>Build Lifecycle bindings</li>                    
+                    <li>Creating a Debian package</li>
+                    <li>Creating an RPM package</li>
+                    <li>Generating the maven-site documentation</li>
+                    <li>Customizing a local installation using build properties</li>                    
+                </ol>
+            </p>
+        </section>   
+        <section name="Notes">
+            <ul>
+                <li>The following build instructions and customizations are for development only.</li>                
+            </ul>
+        </section>     
+        <section name="System requirements">
+            To be able to build the SemaGrow-Stack-Webapp it is necessary that the following
+            components are installed.
+            <ol>
+                <li>git<br/>
+                    git is necessary to clone all repositories. All builds have been tested with
+                    git version 1.8.1.4. To check the installed version enter the following command
+                    in a terminal
+                    <br/>
+<source>
+    git --version
+</source>
+                    <br/>
+                </li>
+                <li>JDK<br/>
+                    A JDK (Java Development Kit) is necessary to compile all java-components. All builds
+                    have been tested with java version 1.6.0_39. Please note that a JRE is not sufficient.
+                    To check the installed version enter the following command in a terminal
+                    <br/>
+<source>
+    java -version
+</source>
+                    <br/>
+                </li>
+                <li>Maven<br/>
+                    Maven is necessary to build and assemble all components. All builds have
+                    been tested with Apache Maven 3.0.3. Please make sure that mvn also uses the runtime
+                    from the JDK and not from JRE. To check the installed version enter the following command
+                    in a terminal
+                    <br/>
+<source>
+    mvn --version
+</source>
+                    <br/>
+                </li>
+                <li>Debian Repository<br/>
+                    The debian assembly deploys the finished deb-package to a given debian (apt) repository.
+                    To get this build to work it is necessary to create a debian repository beforehand.
+                    Please follow <a href="http://joseph.ruscio.org/blog/2010/08/19/setting-up-an-apt-repository/" target="_blank">this</a> guide to create one.
+                    Please note that reprepro is used to deploy to the debian repository. It must be installed before
+                    using the debian assembly.
+                </li>
+                <li>RPM Repository<br/>
+                    The rpm assembly deploys the finished rpm-package to a given rpm repository.
+                    To get this build to work it is necessary to create a rpm repository beforehand.
+                    TODO : add info on rpm repository creation.
+                </li>                
+            </ol>
+        </section>
+        <section name="Build Lifecycle bindings">
+            <ol>
+                <li>package
+                    <ol>
+                        <li>validate
+                            <ol>
+                                <li>Read build.properties file</li>
+                                <li>Download SemaGrow-Stack-Webapp distribution zip and unpack it to copied-tomcat</li>
+                            </ol>                        
+                        </li>
+                        <li>initialize
+                            <ol>
+                                <li>copy src/deb (src/rpm) files to target/deb (target/rpm)</li>
+                                <li>copy src/script/* files to target</li>
+                            </ol>
+                        </li>
+                        <li>package
+                            <ol>
+                                <li>create debian/rpm packages</li>                                
+                            </ol>
+                        </li>
+                    </ol>
+                </li>
+                <li>deploy
+                    <ol>
+                        <li>validate
+                            <ol>
+                                <li>Read build.properties file</li>
+                                <li>Download SemaGrow-Stack-Webapp distribution zip and unpack it to copied-tomcat</li>
+                            </ol>                        
+                        </li>
+                        <li>initialize
+                            <ol>
+                                <li>copy src/deb (src/rpm) files to target/deb (target/rpm)</li>
+                                <li>copy src/script/* files to target</li>
+                            </ol>
+                        </li>
+                        <li>package
+                            <ol>
+                                <li>create debian/rpm packages</li>                                
+                            </ol>
+                        </li>
+                        <li>deploy
+                            <ol>
+                                <li>mark deploy scripts as executable</li>
+                                <li>deploy debian/rpm packages to their respective repositories using provided deploy scripts</li>
+                            </ol>
+                        </li>                        
+                    </ol>
+                </li>                
+            </ol>
+        </section>
+        <section name="Creating a Debian package">
+            To create the SemaGrow-Stack's debian package simply cd into ${semagrow-stack-assembly.root}
+            and issue the following command
+            <br/>
+<source>
+    mvn clean package -P debian
+</source>
+            <br/>
+            This will result in a deployable debian package in ${semagrow-stack-webapp.root}/target.
+            This package can be used to install the SemaGrow-Stack-Webapp. Please note that the 
+            debian package can be used to directly install the SemaGrow-Stack-Webapp or can be deployed
+            to any debian repository.<br/>
+            To use the deploy-debian script cd into ${semagrow-stack-assembly.root} and issue the following command<br/>
+<source>
+    mvn clean deploy -P debian
+</source>          
+            This will also run the deploy-debian script (/src/script/deploy-debian.sh). 
+            The path of the debian repository is adjustable via the distribution.deb.repository setting
+            in build.properties, see below on how to customize.
+        </section>
+        
+        <section name="Creating an RPM package">
+            To create the SemaGrow-Stack's RPM package simply cd into ${semagrow-stack-assembly.root}
+            and issue the following command
+            <br/>
+<source>
+    mvn clean package -P rpm
+</source>
+            <br/>
+            This will result in a deployable RPM package in ${semagrow-stack-webapp.root}/target.
+            This package can be used to install the SemaGrow-Stack-Webapp. Please note that the 
+            RPM package can be used to directly install the SemaGrow-Stack-Webapp or can be deployed
+            to any RPM repository.<br/>
+            To use the deploy-rpm script cd into ${semagrow-stack-assembly.root} and issue the following command<br/>
+<source>
+    mvn clean deploy -P rpm
+</source>          
+            This will also run the deploy-debian script (/src/script/deploy-rpm.sh). 
+            The path of the rpm repository is adjustable via the distribution.rpm.repository setting
+            in build.properties, see below on how to customize.
+        </section>
+
+        <section name="Generating the maven-site documentation">
+            SemaGrow-Stack-Assembly includes an automatically generated documentation including of
+            dependency and license reports as well as javadoc and highlighted source code.
+            To preview the generated documentation issue the following command in a terminal
+            <br/>
+<source>
+    mvn site:run -P semagrow-stack-assembly-documentation
+</source>
+            <br/>
+            This will run the documentation page on a local jetty at port 8080. The documentation
+            page will be accessible via http://localhost:8080. Please note that normal site deployment
+            is determined by the settings in pom.xml, see below.
+        </section>        
+        <section name="Customizing a local installation using build properties">
+            SemaGrow-Stack-Webapp uses three property files with properties that can be overriden.
+            <ul>
+                <li>build.properties<br/>
+                General build properties.                    
+                </li>                
+            </ul>
+            <subsection name="build.properties">
+                <ul>
+                    <li>distribution.deb.repository<br/>
+                    This setting determines the path to the debian repository when using the deploy goal.
+                    </li>
+                    <li>distribution.rpm.repository<br/>
+                    This setting determines the path to the RPM repository when using the deploy goal.
+                    </li>                    
+                </ul>
+            </subsection>            
+            <subsection name="Overriding property files">
+                To override above property files create an own properties file (either the build or the tomcat) 
+                outside of ${semagrow-stack-assembly.root} and let maven use these properties instead
+                of the default ones.
+                To do so a settings.xml must be created, if it doesn't already exist, in the local maven repository
+                which is usually in ~/.m2 (= /home/${username}/.m2 .
+                see <a href="http://maven.apache.org/settings.html" target="_blank">here</a> for an empty settings.xml template.
+                In the profiles section of the settings.xml create a new profile for the semagrow-stack-assembly build environment
+                and mark it as active in the activeProfiles section.
+<source>
+    &lt;profiles&gt;
+        &lt;profile&gt;
+            &lt;id&gt;semagrow-stack-assembly&lt;/id&gt;
+            &lt;properties&gt;
+                &lt;build.properties>/path/to/custom/build.properties&lt;/build.properties&gt;
+            &lt;/properties&gt;
+        &lt;/profile&gt;
+    &lt;/profiles&gt;
+    &lt;activeProfiles&gt;
+        &lt;activeProfile&gt;semagrow-stack-assembly&lt;/activeProfile&gt;
+    &lt;/activeProfiles&gt;
+</source>
+            </subsection>  
+            <subsection name="Overriding distribution properties">
+                To change the maven distribution (site distribution) target of a local installation either add the property distribution.mvn 
+                (distribution.site) to an active profile in a local settings.xml (see above) or start the build with another system parameter
+                using the -D option, for example
+<source>
+  mvn clean deploy -P debian -Ddistribution.mvn=/path/to/some/maven/repo
+</source>                                
+            This will copy the jar file along with the distribution debian file to the given maven repo.
+<source>
+  mvn clean site-deploy -P semagrow-stack-assembly-documentation -Ddistribution.site=/path/to/some/maven/site
+</source>                                
+            This will install the documentation files to the given maven directory.
+            </subsection>              
+        </section>
+    </body>
+</document>

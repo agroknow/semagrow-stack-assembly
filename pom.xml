@@ -7,27 +7,92 @@
     <!--<packaging>pom</packaging>-->
     <name>semagrow-stack-assembly</name>
 
-    <scm>
-        <connection>scm:git:git://github.com/semagrow/semagrow-stack-assembly.git</connection>
-        <url>https://github.com/semagrow/semagrow-stack-assembly</url>
-    </scm>
-
+    <properties>   
+        <build.properties>src/properties/build.properties</build.properties>        
+        <distribution.site>/var/www/docs/${project.artifactId}/${project.version}</distribution.site>        
+        <distribution.mvn>/var/www/mvn</distribution.mvn>
+    </properties>
+        
+    <organization>
+        <name>SemaGrow - FP7</name>
+        <url>http://www.semagrow.eu</url>
+    </organization>
+    
+    <licenses>
+        <license>            
+            <name>Apache 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <id>turnguard</id>
+            <name>Jürgen Jakobitsch</name>
+            <url>http://www.turnguard.com/turnguard</url>
+        </developer>
+        <developer>
+            <id>cmader</id>
+            <name>Christian Mader</name>
+            <url>http://company.semantic-web.at/person/christian_mader</url>
+        </developer>        
+    </developers>
+    
+    <contributors>
+        <contributor>
+            <name>Christian Blaschke</name>
+            <url>http://company.semantic-web.at/person/christian_blaschke</url>
+        </contributor>
+    </contributors>
+    
+    <mailingLists>
+        <mailingList>            
+            <name>public-semagrow</name>
+            <subscribe>subscribe@semagrow_list@googlegroups.com</subscribe>
+            <unsubscribe>unsubscribe@semagrow_list@googlegroups.com</unsubscribe>
+            <post>semagrow_list@googlegroups.com</post>
+        </mailingList>
+    </mailingLists>
+      
     <!-- REPOSITORIES -->
     <repositories>
         <repository>
             <id>swc-semagrow</id>
             <name>SWC SemaGrow Repository</name>
-            <url>http://semagrow.semantic-web.at/mvn/</url>
+            <url>http://semagrow.semantic-web.at/mvn/</url>          
             <snapshots>
                 <updatePolicy>always</updatePolicy>
                 <enabled>true</enabled>
             </snapshots>
-        </repository>
+        </repository>         
         <repository>
             <id>maven-central</id>
             <url>http://repo1.maven.org/maven2</url>
-        </repository>
+        </repository>        
     </repositories>
+    
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven.tinyjee.org</id>
+            <url>http://maven.tinyjee.org</url>
+        </pluginRepository>
+    </pluginRepositories>
+              
+    <scm>
+        <connection>scm:git:git://github.com/semagrow/semagrow-stack-assembly.git</connection>
+        <url>https://github.com/semagrow/semagrow-stack-assembly</url>
+    </scm>
+           
+    <distributionManagement>
+        <site>
+            <id>online-site-repository</id>
+            <url>file://${distribution.site}</url>
+        </site>        
+        <repository>
+            <id>online-mvn-repository</id>
+            <url>file://${distribution.mvn}</url>
+        </repository>                
+    </distributionManagement>
     
     <dependencies>
         <dependency>
@@ -41,6 +106,24 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0-alpha-2</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>                            
+                            <files>                                                                
+                                <file>${build.properties}</file>                                
+                            </files>                            
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>             
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -235,7 +318,7 @@
                         <executions>
                             <execution>
                                 <id>copy-deb</id>
-                                <phase>validate</phase>
+                                <phase>initialize</phase>
                                 <goals>
                                     <goal>copy-resources</goal>
                                 </goals>
@@ -251,7 +334,7 @@
                             </execution>
                             <execution>
                                 <id>copy-deb-deploy-script</id>
-                                <phase>validate</phase>
+                                <phase>initialize</phase>
                                 <goals>
                                     <goal>copy-resources</goal>
                                 </goals>
@@ -273,7 +356,7 @@
                         <executions>
                             <execution>
                                 <id>chmod-debian-deploy</id>
-                                <phase>package</phase>
+                                <phase>deploy</phase>
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
@@ -287,7 +370,7 @@
                             </execution>
                             <execution>
                                 <id>debian-deploy</id>
-                                <phase>package</phase>
+                                <phase>deploy</phase>
                                 <goals>
                                     <goal>exec</goal>
                                 </goals>
@@ -299,6 +382,63 @@
                     </plugin>
                 </plugins>
             </build>            
+        </profile>
+        <profile>
+            <id>semagrow-stack-assembly-documentation</id>
+            <build>               
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-site-plugin</artifactId>
+                            <version>3.3</version>
+                        </plugin>                                
+                    </plugins>
+                </pluginManagement>                
+            </build>            
+            <reporting>                       
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <configuration>                            
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jxr-plugin</artifactId>
+                        <version>2.1</version>
+                    </plugin>
+
+                    <!-- SUREFIRE -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-report-plugin</artifactId>
+                        <version>2.0</version>
+                        <configuration>
+                        </configuration>
+                    </plugin>                     
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-project-info-reports-plugin</artifactId>
+                        <version>2.4</version>
+                        <reportSets>
+                            <reportSet>
+                                <reports>                                    
+                                    <report>summary</report>
+                                    <report>project-team</report>
+                                    <report>mailing-list</report>
+                                    <report>license</report>
+                                    <report>scm</report>
+                                    <report>issue-tracking</report>
+                                    <report>dependencies</report>
+                                </reports>
+                            </reportSet>
+                        </reportSets>
+                    </plugin>                                                                              
+                </plugins>
+            </reporting>
         </profile>
     </profiles>
 </project>

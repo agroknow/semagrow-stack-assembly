@@ -1,6 +1,6 @@
 echo "DEPLOYING DEBIAN" 
 
-DEBIAN_REPOSITORY_ROOT="/var/www/deb"
+DEBIAN_REPOSITORY_ROOT="${distribution.deb.repository}"
 
 cd "target"
 FILES=${project.artifactId}*.deb
