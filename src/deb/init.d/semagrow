@@ -17,16 +17,14 @@
 set -e
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
-NAME="semagrow"
-DESC="SemaGrowStack"
-ARTIFACT_ID="semagrow-stack"
-SHORT_NAME="semagrow"
-SEMAGROW_HOME="/usr/local/semagrow"
-SEMAGROW_GROUP="semagrow-admin"
-SEMAGROW_USER=semagrow
+DESC="${distribution.all.package.longname}"
+SHORT_NAME="${distribution.all.package.shortname}"
+SEMAGROW_HOME="${distribution.all.package.home}"
+SEMAGROW_GROUP="${distribution.all.package.group}"
+SEMAGROW_USER="${distribution.all.package.user}"
 
-DEFAULT=/etc/default/$NAME
-JVM_TMP=/tmp/$ARTIFACT_ID-tmp
+DEFAULT=/etc/default/$SHORT_NAME
+JVM_TMP=/tmp/$SHORT_NAME-tmp
 
 if [ `id -u` -ne 0 ]; then
 	echo "You need root privileges to run this script"
@@ -103,7 +101,7 @@ if [ -f "$DEFAULT" ]; then
 fi
 
 if [ ! -f "$SEMAGROW_HOME/bin/bootstrap.jar" ]; then
-	log_failure_msg "$NAME is not installed"
+	log_failure_msg "$SHORT_NAME is not installed"
 	exit 1
 fi
 
@@ -124,7 +122,7 @@ if [ "$TOMCAT7_SECURITY" = "yes" ]; then
 fi
 
 # Define other required variables
-SEMAGROW_PID="/var/run/$ARTIFACT_ID/$NAME.pid"
+SEMAGROW_PID="/var/run/$SHORT_NAME/$SHORT_NAME.pid"
 CATALINA_SH="$SEMAGROW_HOME/bin/catalina.sh"
 
 # Look for Java Secure Sockets Extension (JSSE) JARs
@@ -182,7 +180,7 @@ case "$1" in
 		exit 1
 	fi
 
-	echo "Starting $DESC" "$NAME"
+	echo "Starting $DESC" "$SHORT_NAME"
 	if start-stop-daemon --test --start --pidfile "$SEMAGROW_PID" \
 		--user $SEMAGROW_USER --exec "$JAVA_HOME/bin/java" \
 		>/dev/null; then
@@ -213,7 +211,7 @@ case "$1" in
 	fi
 	;;
   stop)
-	echo "Stopping $DESC" "$NAME"
+	echo "Stopping $DESC" "$SHORT_NAME"
 
 	set +e
 	if [ -f "$SEMAGROW_PID" ]; then 
@@ -224,7 +222,7 @@ case "$1" in
 			log_progress_msg "$DESC is not running but pid file exists, cleaning up"
 		elif [ $? -eq 3 ]; then
 			PID="`cat $SEMAGROW_PID`"
-			log_failure_msg "Failed to stop $NAME (pid $PID)"
+			log_failure_msg "Failed to stop $SHORT_NAME (pid $PID)"
 			exit 1
 		fi
 		rm -f "$SEMAGROW_PID"

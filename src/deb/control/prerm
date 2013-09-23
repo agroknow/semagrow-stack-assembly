@@ -1,3 +1,4 @@
 #!/bin/sh
+SEMAGROW_SHORT_NAME="${distribution.all.package.shortname}";
 echo "removing semagrow init script"
-rm -f /etc/init.d/semagrow
+rm -f /etc/init.d/$SEMAGROW_SHORT_NAME
