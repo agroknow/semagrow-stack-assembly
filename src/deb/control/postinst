@@ -28,7 +28,9 @@ case "$1" in
         fi
 
         chmod 640 $SEMAGROW_HOME/conf/tomcat-users.xml
-        chown -Rh $SEMAGROW_USER:$SEMAGROW_GROUP $SEMAGROW_HOME/
+        chown -Rh $SEMAGROW_USER:$SEMAGROW_GROUP $SEMAGROW_HOME
+        chown -Rh $SEMAGROW_USER:$SEMAGROW_GROUP /var/log/$SEMAGROW_SHORT_NAME
+        chown -Rh $SEMAGROW_USER:$SEMAGROW_GROUP /var/lib/$SEMAGROW_SHORT_NAME
         chmod +x  $SEMAGROW_HOME/bin/*.sh        
         chmod +x  /etc/init.d/$SEMAGROW_SHORT_NAME
     ;;
