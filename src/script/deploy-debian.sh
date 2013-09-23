@@ -8,7 +8,7 @@ for f in $FILES
 do
     DEBIAN_PACKAGE="`pwd`/$f"
     cd $DEBIAN_REPOSITORY_ROOT
-    reprepro remove lucid ${project.artifactId}
+    reprepro remove lucid semagrow
     reprepro includedeb lucid $DEBIAN_PACKAGE
 done
 

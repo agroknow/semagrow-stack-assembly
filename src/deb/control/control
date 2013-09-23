@@ -1,4 +1,4 @@
-Package: semagrow-stack
+Package: semagrow
 Version: ${project.version} 
 Section: misc
 Priority: low
