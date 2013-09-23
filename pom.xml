@@ -344,8 +344,8 @@
                                         </data>
                                         <data>
                                             <type>link</type>
-                                            <linkName>/var/log/${distribution.all.package.shortname}</linkName>
-                                            <linkTarget>/var/lib/${distribution.all.package.shortname}/logs</linkTarget>
+                                            <linkName>/usr/local/${distribution.all.package.shortname}/logs</linkName>
+                                            <linkTarget>/var/log/${distribution.all.package.shortname}</linkTarget>
                                             <symlink>true</symlink>
                                         </data>                                        
                                     </dataSet>
