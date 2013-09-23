@@ -344,7 +344,7 @@
                                         </data>
                                         <data>
                                             <type>link</type>
-                                            <linkName>/var/logs/${distribution.all.package.name}</linkName>
+                                            <linkName>/var/log/${distribution.all.package.name}</linkName>
                                             <linkTarget>/var/lib/${distribution.all.package.name}/logs</linkTarget>
                                             <symlink>true</symlink>
                                         </data>                                        
