@@ -17,16 +17,16 @@
 set -e
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
-NAME=semagrow
-DESC=SemaGrowStack
-ARTIFACT_ID=semagrow-stack-debian
-SHORT_NAME=semagrow
-SEMAGROW_HOME=/opt/semagrow
-SEMAGROW_GROUP=semagrow-admin
-SEMGROW_USER=semagrow
+NAME="semagrow"
+DESC="SemaGrowStack"
+ARTIFACT_ID="semagrow-stack"
+SHORT_NAME="semagrow"
+SEMAGROW_HOME="/opt/semagrow"
+SEMAGROW_GROUP="semagrow-admin"
+SEMAGROW_USER=semagrow
 
 DEFAULT=/etc/default/$NAME
-JVM_TMP=/tmp/tomcat7-$NAME-tmp
+JVM_TMP=/tmp/$ARTIFACT_ID-tmp
 
 if [ `id -u` -ne 0 ]; then
 	echo "You need root privileges to run this script"
@@ -47,10 +47,6 @@ fi
 
 
 # The following variables can be overwritten in $DEFAULT
-
-# Run Tomcat 7 as this user ID and group ID
-TOMCAT7_USER=semagrow
-TOMCAT7_GROUP=semagrow-admin
 
 # this is a work-around until there is a suitable runtime replacement 
 # for dpkg-architecture for arch:all packages
@@ -86,12 +82,6 @@ for jdir in $JDK_DIRS; do
     fi
 done
 export JAVA_HOME
-
-# Directory where the Tomcat 6 binary distribution resides
-CATALINA_HOME=/opt/$NAME
-
-# Directory for per-instance configuration files and webapps
-CATALINA_BASE=/opt/$NAME
 
 # Use the Java security manager? (yes/no)
 TOMCAT7_SECURITY=no
@@ -171,7 +161,7 @@ catalina_sh() {
 	# Run the catalina.sh script as a daemon
 	set +e
 	touch "$SEMAGROW_PID" "$SEMAGROW_HOME"/logs/catalina.out
-	chown $SEMAGROW_USER "$SEMAGROW_PID" "$SEMAGROW_HOME"/logs/catalina.out
+	chown "$SEMAGROW_USER" "$SEMAGROW_PID" "$SEMAGROW_HOME"/logs/catalina.out
 	start-stop-daemon --start -b -u "$SEMAGROW_USER" -g "$SEMAGROW_GROUP" \
 		-c "$SEMAGROW_USER" -d "$CATALINA_TMPDIR" -p "$SEMAGROW_PID" \
 		-x /bin/bash -- -c "$AUTHBIND_COMMAND $TOMCAT_SH"
@@ -192,7 +182,7 @@ case "$1" in
 		exit 1
 	fi
 
-	log_daemon_msg "Starting $DESC" "$NAME"
+	echo "Starting $DESC" "$NAME"
 	if start-stop-daemon --test --start --pidfile "$SEMAGROW_PID" \
 		--user $SEMAGROW_USER --exec "$JAVA_HOME/bin/java" \
 		>/dev/null; then
@@ -218,17 +208,17 @@ case "$1" in
 			log_end_msg 0
 		fi
 	else
-	        log_progress_msg "(already running)"
+	    log_progress_msg "(already running)"
 		log_end_msg 0
 	fi
 	;;
   stop)
-	log_daemon_msg "Stopping $DESC" "$NAME"
+	echo "Stopping $DESC" "$NAME"
 
 	set +e
 	if [ -f "$SEMAGROW_PID" ]; then 
 		start-stop-daemon --stop --pidfile "$SEMAGROW_PID" \
-			--user "$SEMAGROW_USER" \
+			--user $SEMAGROW_USER \
 			--retry=TERM/20/KILL/5 >/dev/null
 		if [ $? -eq 1 ]; then
 			log_progress_msg "$DESC is not running but pid file exists, cleaning up"

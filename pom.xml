@@ -1,13 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>eu.semagrow.stack</groupId>
+    <groupId>eu.semagrow.stack.assembly</groupId>
     <artifactId>semagrow-stack-assembly</artifactId>
     <version>1.0.0-rc1</version>
     <!--<packaging>pom</packaging>-->
     <name>semagrow-stack-assembly</name>
 
     <properties>   
+        <project.install.name>semagrow</project.install.name>
         <build.properties>src/properties/build.properties</build.properties>        
         <distribution.site>/var/www/docs/${project.artifactId}/${project.version}</distribution.site>        
         <distribution.mvn>/var/www/mvn</distribution.mvn>
@@ -96,12 +97,12 @@
     
     <dependencies>
         <dependency>
-            <groupId>eu.semagrow.stack</groupId>
+            <groupId>eu.semagrow.stack.webapp</groupId>
             <artifactId>semagrow-stack-webapp</artifactId>
             <version>1.0.0-rc1</version>           
             <classifier>distribution</classifier>
             <type>zip</type>            
-        </dependency>
+        </dependency>        
     </dependencies>
 
     <build>
@@ -272,10 +273,24 @@
                                     <verbose>true</verbose>                            
                                     <controlDir>${basedir}/target/deb/control</controlDir>
                                                                                          
-                                    <dataSet>            
+                                    <dataSet>
+                                        <data>
+                                            <type>template</type>
+                                            <paths>
+                                                <path>etc/${project.install.name}</path>
+                                                <path>var/lib/${project.install.name}</path>
+                                                <path>var/log/${project.install.name}</path>
+                                                <path>var/run/${project.install.name}</path>
+                                            </paths>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                            </mapper>
+                                        </data>                                        
                                         <data>                                    
                                             <src>${basedir}/target/deb/init.d</src>
-                                            <type>directory</type>                                                                        
+                                            <type>directory</type>                                             
                                             <mapper>
                                                 <type>perm</type>
                                                 <prefix>/etc/init.d</prefix>
@@ -284,29 +299,39 @@
                                             </mapper>
                                         </data>                                
                                         <data>
-                                            <src>${basedir}/target/copied-tomcat</src>
+                                            <src>${basedir}/target/copied-tomcat/</src>
                                             <type>directory</type>
+                                            <excludes>**/domains/**, **/logs/**</excludes>                                                                                        
                                             <mapper>
                                                 <type>perm</type>
-                                                <prefix>/opt/semagrow</prefix>
-                                                <user>loader</user>
-                                                <group>loader</group>
-                                            </mapper>
-                                        </data>                                
-                                        <data>
-                                            <type>template</type>
-                                            <paths>
-                                                <path>etc/${project.artifactId}</path>
-                                                <path>var/lib/${project.artifactId}</path>
-                                                <path>var/log/${project.artifactId}</path>
-                                                <path>var/run/${project.artifactId}</path>
-                                            </paths>
-                                            <mapper>
-                                                <type>perm</type>
+                                                <prefix>/usr/local/${project.install.name}</prefix>
                                                 <user>loader</user>
                                                 <group>loader</group>
                                             </mapper>
                                         </data>
+                                        <data>
+                                            <src>${basedir}/target/copied-tomcat/</src>
+                                            <type>directory</type>
+                                            <includes>**/domains/**</includes>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/var/lib/${project.install.name}</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                            </mapper>
+                                        </data>
+                                        <data>
+                                          <type>link</type>
+                                          <linkName>/usr/local/${project.install.name}/domains</linkName>
+                                          <linkTarget>/var/lib/${project.install.name}/domains</linkTarget>
+                                          <symlink>true</symlink>
+                                        </data>
+                                        <data>
+                                          <type>link</type>
+                                          <linkName>/var/logs/${project.install.name}</linkName>
+                                          <linkTarget>/var/lib/${project.install.name}/logs</linkTarget>
+                                          <symlink>true</symlink>
+                                        </data>                                        
                                     </dataSet>
                                 </configuration>
                             </execution>
