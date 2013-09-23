@@ -1,5 +1,5 @@
 #!/bin/sh
-SEMAGROW_HOME="/opt/semagrow/";
+SEMAGROW_HOME="/usr/local/semagrow/";
 SEMAGROW_GROUP="semagrow-admin";
 SEMAGROW_USER="semagrow";
 
