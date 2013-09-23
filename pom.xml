@@ -293,10 +293,10 @@
                                         <data>
                                             <type>template</type>
                                             <paths>
-                                                <path>etc/${distribution.all.package.name}</path>
-                                                <path>var/lib/${distribution.all.package.name}</path>
-                                                <path>var/log/${distribution.all.package.name}</path>
-                                                <path>var/run/${distribution.all.package.name}</path>
+                                                <path>etc/${distribution.all.package.shortname}</path>
+                                                <path>var/lib/${distribution.all.package.shortname}</path>
+                                                <path>var/log/${distribution.all.package.shortname}</path>
+                                                <path>var/run/${distribution.all.package.shortname}</path>
                                             </paths>
                                             <mapper>
                                                 <type>perm</type>
@@ -320,7 +320,7 @@
                                             <excludes>**/domains/**, **/logs/**</excludes>                                                                                        
                                             <mapper>
                                                 <type>perm</type>
-                                                <prefix>/usr/local/${distribution.all.package.name}</prefix>
+                                                <prefix>/usr/local/${distribution.all.package.shortname}</prefix>
                                                 <user>loader</user>
                                                 <group>loader</group>
                                             </mapper>
@@ -331,21 +331,21 @@
                                             <includes>**/domains/**</includes>
                                             <mapper>
                                                 <type>perm</type>
-                                                <prefix>/var/lib/${distribution.all.package.name}</prefix>
+                                                <prefix>/var/lib/${distribution.all.package.shortname}</prefix>
                                                 <user>loader</user>
                                                 <group>loader</group>
                                             </mapper>
                                         </data>
                                         <data>
                                             <type>link</type>
-                                            <linkName>/usr/local/${distribution.all.package.name}/domains</linkName>
-                                            <linkTarget>/var/lib/${distribution.all.package.name}/domains</linkTarget>
+                                            <linkName>/usr/local/${distribution.all.package.shortname}/domains</linkName>
+                                            <linkTarget>/var/lib/${distribution.all.package.shortname}/domains</linkTarget>
                                             <symlink>true</symlink>
                                         </data>
                                         <data>
                                             <type>link</type>
-                                            <linkName>/var/log/${distribution.all.package.name}</linkName>
-                                            <linkTarget>/var/lib/${distribution.all.package.name}/logs</linkTarget>
+                                            <linkName>/var/log/${distribution.all.package.shortname}</linkName>
+                                            <linkTarget>/var/lib/${distribution.all.package.shortname}/logs</linkTarget>
                                             <symlink>true</symlink>
                                         </data>                                        
                                     </dataSet>
