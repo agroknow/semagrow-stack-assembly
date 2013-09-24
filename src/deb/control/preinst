@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "PREINSTALL"
+echo "PREINSTALL WITH $@"
 
 SEMAGROW_SHORT_NAME="${distribution.all.package.shortname}";
 SEMAGROW_HOME="${distribution.all.package.home}";

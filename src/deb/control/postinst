@@ -4,7 +4,7 @@ SEMAGROW_HOME="${distribution.all.package.home}";
 SEMAGROW_GROUP="${distribution.all.package.group}";
 SEMAGROW_USER="${distribution.all.package.user}";
 
-echo "POSTINSTALL"
+echo "POSTINSTALL WITH $@"
 
 set -e
 case "$1" in

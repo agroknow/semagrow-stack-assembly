@@ -2,7 +2,7 @@
 
 SEMAGROW_SHORT_NAME="${distribution.all.package.shortname}";
 
-echo "PREREMOVE"
+echo "PREREMOVE WITH $@"
 
 #rm -f /etc/init.d/$SEMAGROW_SHORT_NAME
 

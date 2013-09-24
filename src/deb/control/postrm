@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "POSTRM"
+echo "POSTRM WITH $@"
 set -e
 case "$1" in
     abort-install)
