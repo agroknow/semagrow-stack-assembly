@@ -13,7 +13,7 @@ case "$1" in
 	    echo "Remove";
     ;;
     upgrade)
-	    echo "Upgrade";
+	    echo "Upgrade X";
 			echo "Deleting : $SEMAGROW_HOME/work/Catalina/localhost/SemaGrow";
 			rm -f $SEMAGROW_HOME/work/Catalina/localhost/SemaGrow
 			echo "Deleting : $SEMAGROW_HOME/domains/localhost/SemaGrow";
