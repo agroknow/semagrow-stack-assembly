@@ -1,6 +1,7 @@
 #!/bin/sh
 
 SEMAGROW_SHORT_NAME="${distribution.all.package.shortname}";
+SEMAGROW_HOME="${distribution.all.package.home}";
 
 echo "PREREMOVE WITH $@"
 
@@ -13,6 +14,12 @@ case "$1" in
     ;;
     upgrade)
 	    echo "Upgrade";
+			echo "Deleting : $SEMAGROW_HOME/work/Catalina/localhost/SemaGrow";
+			rm -f $SEMAGROW_HOME/work/Catalina/localhost/SemaGrow
+			echo "Deleting : $SEMAGROW_HOME/domains/localhost/SemaGrow";
+			rm -rf $SEMAGROW_HOME/domains/localhost/SemaGrow
+			echo "Deleting : $SEMAGROW_HOME/domains/localhost/SemaGrow.war";
+			rm -f $SEMAGROW_HOME/domains/localhost/SemaGrow.war
     ;;
     fail-upgrade)
 	    echo "Fail upgrade";
