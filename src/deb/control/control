@@ -1,5 +1,5 @@
 Package: semagrow
-Version: ${project.version} 
+Version: 2.0.0
 Section: misc
 Priority: low
 Architecture: all
