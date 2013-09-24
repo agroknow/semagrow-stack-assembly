@@ -1,4 +1,20 @@
 #!/bin/sh
+
 SEMAGROW_SHORT_NAME="${distribution.all.package.shortname}";
-echo "removing semagrow init script"
-rm -f /etc/init.d/$SEMAGROW_SHORT_NAME
+
+echo "PREREMOVE"
+
+#rm -f /etc/init.d/$SEMAGROW_SHORT_NAME
+
+set -e
+case "$1" in
+    remove)
+	    echo "Remove";
+    ;;
+    upgrade)
+	    echo "Upgrade";
+    ;;
+    fail-upgrade)
+	    echo "Fail upgrade";
+    ;;
+esac
