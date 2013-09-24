@@ -16,10 +16,10 @@ case "$1" in
 	    echo "Upgrade";
 			echo "Deleting : $SEMAGROW_HOME/work/Catalina/localhost/SemaGrow";
 			rm -rf $SEMAGROW_HOME/work/Catalina/localhost/SemaGrow
-			echo "Deleting : $SEMAGROW_HOME/domains/localhost/SemaGrow";
-			rm -rf $SEMAGROW_HOME/domains/localhost/SemaGrow
-			echo "Deleting : $SEMAGROW_HOME/domains/localhost/SemaGrow.war";
-			rm -f $SEMAGROW_HOME/domains/localhost/SemaGrow.war
+			echo "Deleting : $SEMAGROW_HOME/domains/localhost/webapps/SemaGrow";
+			rm -rf $SEMAGROW_HOME/domains/localhost/webapps/SemaGrow
+			echo "Deleting : $SEMAGROW_HOME/domains/localhost/webapps/SemaGrow.war";
+			rm -f $SEMAGROW_HOME/domains/localhost/webapps/SemaGrow.war
     ;;
     fail-upgrade)
 	    echo "Fail upgrade";
