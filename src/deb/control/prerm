@@ -3,7 +3,7 @@
 SEMAGROW_SHORT_NAME="${distribution.all.package.shortname}";
 SEMAGROW_HOME="${distribution.all.package.home}";
 
-echo "PREREMOVE WITH $@"
+echo "PREREMOVE (version: ${project.version}) WITH $@"
 
 #rm -f /etc/init.d/$SEMAGROW_SHORT_NAME
 

@@ -1,5 +1,7 @@
 #!/bin/sh
-echo "POSTRM WITH $@"
+
+echo "POSTRM (version: ${project.version}) WITH $@"
+
 set -e
 case "$1" in
     abort-install)

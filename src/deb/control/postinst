@@ -1,10 +1,11 @@
 #!/bin/sh
+
 SEMAGROW_SHORT_NAME="${distribution.all.package.shortname}";
 SEMAGROW_HOME="${distribution.all.package.home}";
 SEMAGROW_GROUP="${distribution.all.package.group}";
 SEMAGROW_USER="${distribution.all.package.user}";
 
-echo "POSTINSTALL WITH $@"
+echo "POSTINSTALL (version: ${project.version}) WITH $@"
 
 set -e
 case "$1" in
