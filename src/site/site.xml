@@ -9,6 +9,7 @@
     <menu name="SemaGrow-Stack-Assembly">
       <item name="Introduction" href="index.html"/>      
       <item name="Building" href="building.html"/>
+      <item name="Installation" href="installation.html"/>
     </menu>          
     <menu ref="reports"/>
   </body>
