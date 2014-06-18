@@ -314,11 +314,21 @@
                                                 <user>loader</user>
                                                 <group>loader</group>
                                             </mapper>
-                                        </data>                                
+                                        </data>
+                                        <data>
+                                            <src>${basedir}/target/copied-tomcat/resources/</src>
+                                            <type>directory</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/etc/default/${distribution.all.package.shortname}</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                            </mapper>
+                                        </data>
                                         <data>
                                             <src>${basedir}/target/copied-tomcat/</src>
                                             <type>directory</type>
-                                            <excludes>**/domains/**, **/logs/**</excludes>                                                                                        
+                                            <excludes>**/domains/**, **/logs/**</excludes> 
                                             <mapper>
                                                 <type>perm</type>
                                                 <prefix>/usr/local/${distribution.all.package.shortname}</prefix>
