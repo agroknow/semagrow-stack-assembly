@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>eu.semagrow.stack.assembly</groupId>
     <artifactId>semagrow-stack-assembly</artifactId>
-    <version>1.0.0-rc1</version>
+    <version>1.0.0</version>
     <!--<packaging>pom</packaging>-->
     <name>semagrow-stack-assembly</name>
 
@@ -99,7 +99,7 @@
         <dependency>
             <groupId>eu.semagrow.stack.webapp</groupId>
             <artifactId>semagrow-stack-webapp</artifactId>
-            <version>1.0.0-rc1</version>           
+            <version>1.0.0</version>           
             <classifier>distribution</classifier>
             <type>zip</type>            
         </dependency>        
@@ -140,7 +140,7 @@
                                 <artifactItem>
                                     <groupId>eu.semagrow.stack.webapp</groupId>
                                     <artifactId>semagrow-stack-webapp</artifactId>
-                                    <version>1.0.0-rc1</version>
+                                    <version>1.0.0</version>
                                     <classifier>distribution</classifier>
                                     <type>zip</type>
                                 </artifactItem>
