@@ -104,6 +104,22 @@
                                 </li>
                             </ul>
                         </li>
+			<li>share/
+				<ul>
+					<li>doc/
+						<ul>
+							<li>semagrow/
+								<ul>
+									<li>annotation-guide.pdf</li>	
+									<li>metadata.ttl</li>
+									<li>metadata-2.ttl</li>
+									<li>semagrow_getting_started.odt</li>
+								</ul>
+							<li>
+						</ul>
+					</li>
+				</ul>
+			</li>	
                     </ul>
                 </li>
                 <li>/etc/
