@@ -182,7 +182,7 @@ case "$1" in
 
 	echo "Starting $DESC" "$SHORT_NAME"
 	if start-stop-daemon --test --start --pidfile "$SEMAGROW_PID" \
-		--user $SEMAGROW_USER --exec "$JAVA_HOME/bin/java" \
+		--user $SEMAGROW_USER --startas "$JAVA_HOME/bin/java" \
 		>/dev/null; then
 
 		# Remove / recreate JVM_TMP directory
@@ -196,7 +196,7 @@ case "$1" in
 		catalina_sh start $SECURITY
 		sleep 5
         	if start-stop-daemon --test --start --pidfile "$SEMAGROW_PID" \
-			--user $SEMAGROW_USER --exec "$JAVA_HOME/bin/java" \
+			--user $SEMAGROW_USER --startas "$JAVA_HOME/bin/java" \
 			>/dev/null; then
 			if [ -f "$SEMAGROW_PID" ]; then
 				rm -f "$SEMAGROW_PID"
@@ -236,7 +236,7 @@ case "$1" in
    status)
 	set +e
 	start-stop-daemon --test --start --pidfile "$SEMAGROW_PID" \
-		--user $SEMAGROW_USER --exec "$JAVA_HOME/bin/java" \
+		--user $SEMAGROW_USER --startas "$JAVA_HOME/bin/java" \
 		>/dev/null 2>&1
 	if [ "$?" = "0" ]; then
 
@@ -261,7 +261,7 @@ case "$1" in
 	;;
   try-restart)
         if start-stop-daemon --test --start --pidfile "$SEMAGROW_PID" \
-		--user $SEMAGROW_USER --exec "$JAVA_HOME/bin/java" \
+		--user $SEMAGROW_USER --startas "$JAVA_HOME/bin/java" \
 		>/dev/null; then
 		$0 start
 	fi

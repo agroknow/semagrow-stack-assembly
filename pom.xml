@@ -305,6 +305,26 @@
                                                 <group>loader</group>
                                             </mapper>
                                         </data>                                        
+                                        <data>
+                                            <src>${basedir}/src/resources/docs</src>
+                                            <type>directory</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/usr/share/doc/${distribution.all.package.shortname}</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                            </mapper>
+                                        </data>				        	
+                                        <data>
+                                            <src>${basedir}/src/resources/defaults</src>
+                                            <type>directory</type>
+                                            <mapper>
+                                                <type>perm</type>
+                                                <prefix>/etc/default/${distribution.all.package.shortname}</prefix>
+                                                <user>loader</user>
+                                                <group>loader</group>
+                                            </mapper>
+                                        </data>
                                         <data>                                    
                                             <src>${basedir}/target/deb/init.d</src>
                                             <type>directory</type>                                             
