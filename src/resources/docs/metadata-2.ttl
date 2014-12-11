@@ -565,17 +565,17 @@
         <http://www.w3.org/2007/05/powder-s#issuedby>
                 <http://eleon.iit.demokritos.gr/user#NCSRD> .
 
-<urn:uuid:b88a3d9a-4e7f-409d-9677-168b64219a87>
-        <http://purl.org/dc/terms/title>
-                "?s http://purl.org/dc/terms/issued ?o"^^xsd:string ;
-        <http://rdf.iit.demokritos.gr/2013/sevod#facet>
-                <http://rdf.iit.demokritos.gr/2013/sevod#propertyFacet> ;
-        <http://rdfs.org/ns/void#property>
-                <http://purl.org/dc/terms/issued> ;
-        <http://rdfs.org/ns/void#triples>
-                "7704812"^^xsd:int ;
-        <http://www.w3.org/2007/05/powder-s#issuedby>
-                <http://eleon.iit.demokritos.gr/user#NCSRD> .
+#<urn:uuid:b88a3d9a-4e7f-409d-9677-168b64219a87>
+#        <http://purl.org/dc/terms/title>
+#                "?s http://purl.org/dc/terms/issued ?o"^^xsd:string ;
+#        <http://rdf.iit.demokritos.gr/2013/sevod#facet>
+#                <http://rdf.iit.demokritos.gr/2013/sevod#propertyFacet> ;
+#        <http://rdfs.org/ns/void#property>
+#                <http://purl.org/dc/terms/issued> ;
+#        <http://rdfs.org/ns/void#triples>
+#                "7704812"^^xsd:int ;
+#        <http://www.w3.org/2007/05/powder-s#issuedby>
+#                <http://eleon.iit.demokritos.gr/user#NCSRD> .
 
 <urn:uuid:71a460ed-4c6a-4248-8cbe-018e040c7fe4>
         <http://purl.org/dc/terms/title>
@@ -1943,11 +1943,11 @@
 
 <urn:uuid:9f885cec-9db6-4eb5-8d12-2ed95f1f16b6>
         <http://purl.org/dc/terms/title>
-                "?s http://www.semagrow.eu/rdf/issued ?o"^^xsd:string ;
+                "?s http://www.semagrow.eu/rdf/cleanIssued ?o"^^xsd:string ;
         <http://rdf.iit.demokritos.gr/2013/sevod#facet>
                 <http://rdf.iit.demokritos.gr/2013/sevod#propertyFacet> ;
         <http://rdfs.org/ns/void#property>
-                <http://www.semagrow.eu/rdf/issued> ;
+                <http://www.semagrow.eu/rdf/cleanIssued> ;
         <http://rdfs.org/ns/void#triples>
                 "6612999"^^xsd:int ;
         <http://www.w3.org/2007/05/powder-s#issuedby>
