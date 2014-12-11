@@ -5,3 +5,4 @@ Priority: low
 Architecture: all
 Description: SemaGrowStack
 Maintainer: jakobitschj@semantic-web.at
+Depends: java-runtime-headless (>= 1.7)
