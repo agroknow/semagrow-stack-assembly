@@ -28,12 +28,12 @@ The information that the SemaGrow stack needs regarding the available datasets, 
 /etc/default/semagrow/metadata.ttl
 
 This file contains all the necessary information regarding the available datasets that the SemaGrow stack can access in order to get the data the user requests through SemaGrow using SPARQL queries. 
-The metadata.ttl file can be modified with a text editor or, ideally, using the Eleon metadata editor. You can find detailed information on the usage of the Eleon metadata editor at the Eleon User Guide.
+The metadata.ttl file can be modified with a text editor or, ideally, using the Eleon metadata editor. You can find detailed information on the usage of the Eleon metadata editor at the Eleon User Guide. Each time you modify the metadata.ttl file you must restart the semagrow service by issuing  'service semagrow restart'.
 
 The usage of the SemaGrow stack is performed through a browser, by accessing http://<ip>:8080/SemaGrow
 Clicking on the “Sparql” tab presents the SPARQL query environment (Screenshot 1).
 
-By submitting SPARQL queries, one can get relevant results from the datasets whose metadata information is provided through the metadata.ttl file. In our example, the metadata.ttl file contains metadata regarding the AGRIS dataset, which is an international information system for the agricultural science and technology.
+By submitting SPARQL queries, one can get relevant results from the datasets whose metadata information is provided through the metadata.ttl file. In our example, the metadata.ttl file[1] contains metadata regarding the AGRIS dataset, which is an international information system for the agricultural science and technology.
 
 You can see a simple usage of the SemaGrow stack by submitting the SPARQL query already filled out in the SPARQL query box:
 
@@ -48,7 +48,7 @@ The great benefit from using the SemaGrow stack is that by altering the metadata
 
 EXAMPLE
 
-Let's say one wants to get the agricultural images published between the years 2006 and 2008. The SPARQL query that can provide this result set is (the metadata file contains information only for the AGRIS dataset and can be found at *):
+Let's say one wants to get the agricultural images published between the years 2006 and 2008. The SPARQL query that can provide this result set is (the metadata file contains information only for the AGRIS dataset and can be found at [1]):
 
 SELECT ?s ?a WHERE {
   ?s <http://purl.org/dc/terms/issued> ?a.
@@ -82,10 +82,13 @@ SELECT (COUNT(?s) AS ?no) WHERE {
    FILTER(xsd:integer(?a) < 2009).
 }
 
-after having replaced the old metadata.ttl file with the one containing new information for the year_of_publication dataset (the metadata-2.ttl file that accompanies this document), the number of results is greater than the one before.
+after having replaced the old metadata.ttl file with the one[2] containing new information for the year_of_publication dataset, the number of results is greater than the one before.
 
 This is due to the fact that SemaGrow joined the two related datasets and, since the new dataset can match more triples that satisfy the 
 
 FILTER(xsd:integer(?a) > 2005). FILTER(xsd:integer(?a) < 2009).
 
 triple patterns to publications, it gives back as a result the union of the two result sets, that now contains the results of the first dataset as well as additional results from the second dataset, that were not contained in the first one, because of ambiguous statement of the publication year, as in “10/11/07”.
+
+[1] https://github.com/semagrow/semagrow-stack-assembly/blob/master/src/resources/docs/metadata.ttl
+[2] https://github.com/semagrow/semagrow-stack-assembly/blob/master/src/resources/docs/metadata-2.ttl
